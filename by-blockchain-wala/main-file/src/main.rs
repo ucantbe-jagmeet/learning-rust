@@ -1,8 +1,7 @@
 fn main() {
     println!("Hello, world!");
-    let sum = sum_of_xandy(30, 50);
     another_function1();
-    println!("Sum of x and y is : {sum}");
+    println!("Sum of x and y is : {}",sum_of_xandy(30, 50) );
 
 }
 
