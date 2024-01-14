@@ -1,7 +1,7 @@
 fn main() {
     println!("Hello, world!");
     another_function1();
-    println!("Sum of x and y is : {}",sum_of_xandy(30, 50) );
+    println!("Sum of x and y is : {} and {}",sum_of_xandy(30, 50), sum_of_xandy(20, 100) );
 
 }
 
