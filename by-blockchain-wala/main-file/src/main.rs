@@ -1,3 +1,8 @@
+// statement -> it returns nothing
+// expression -> it returns something
+
+
+
 fn main() {
     println!("Hello, world!");
     another_function1();
@@ -7,7 +12,7 @@ fn main() {
 
 fn sum_of_xandy(x : u32, y: u32) -> u32{
     let sum = x+ y;
-    return  sum;
+    sum
 
 }
 
