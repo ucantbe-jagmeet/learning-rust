@@ -6,7 +6,7 @@ fn main(){
     
     unsafe {
         println!("Initial count : {}", COUNT);
-        COUNT+=1; 
+        COUNT += 1; 
         println!("Updated count : {}", COUNT);
     }
 
