@@ -22,4 +22,4 @@ fn add_numbers(x : i32, y:i32) -> i32{
 
     println!("Heap value 2 : {:?}", *heap_value2);
     result
- }
+}
