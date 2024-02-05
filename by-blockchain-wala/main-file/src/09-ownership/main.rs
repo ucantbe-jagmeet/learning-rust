@@ -32,6 +32,13 @@ fn main(){
     println!("before x value is : {x}");
     makes_copy(x); // static data type mei copy hota hai hamesha
     println!("after x value is : {x}");
+
+
+    //############## more about ownership #######################
+    let s1 = give_ownership();
+    let s2 = String::from("hello");
+    let s3 = takes_and_gives_back(s2);
+    
 } 
 
 fn takes_responsibility(some_string: String){
@@ -40,4 +47,14 @@ fn takes_responsibility(some_string: String){
 
 fn makes_copy(some_integer: i32){
     println!("{}", some_integer);
+}
+
+fn give_ownership() -> String{
+    let some_string = String::from("yours");
+    some_string
+}
+
+// this function takes a string and returns one
+fn takes_and_gives_back(a_string: String) -> String{
+    a_string
 }
