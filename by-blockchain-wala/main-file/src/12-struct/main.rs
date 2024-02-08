@@ -26,6 +26,8 @@ fn main(){
 }
 
 // custom data types - defined by user
+// owner of the struct data types is decided by the data types used in the struct
+// the variable initiates the struct object is the owner 
 #[derive(Debug)]
 struct User{
     active:bool,
@@ -33,6 +35,15 @@ struct User{
     email: String,
     sign_in_count: u64,
 }
+
+// reference type struct -- this will create issue/ errors 
+// struct User{
+//     active:bool,
+//     username: &str,
+//     email: &str,
+//     sign_in_count: u64,
+// }
+
 
 fn build_user(email: String, username: String) -> User {
     User {
