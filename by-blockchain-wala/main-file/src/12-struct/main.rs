@@ -13,7 +13,6 @@ fn main(){
     
     // println!("info ---- {}", dog.2); // we have to write number to get values from tuples
 
-
     // #########################
 
     let new_user = build_user(String::from("jag@gmail.com"), String::from("ucantbe"));
