@@ -5,7 +5,12 @@ fn main(){
         email: String ::from("jagmeet@mail.com"),
         mobile_no: 8989898989
     };
-    println!("{:#?}", jagmeet)
+    println!("{:#?}", jagmeet);
+    
+    // tuples
+    let dog:(&str, &str, u64)= ("Bruno", "Mars", 10);
+    
+    println!("info ---- {}", dog.2); // we have to write number to get values from tupples
 }
 
 // custom data types - defined by user
