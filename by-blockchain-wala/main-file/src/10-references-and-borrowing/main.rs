@@ -18,6 +18,9 @@ fn main(){
     // let len = calculate_len(&mut s1, &mut s1);  
 
     // println!("The len of {} is {}", s1, len);
+
+    example_1(); // This will work
+    example_2(); // this will not work
 }
 
 // fn calculate_len(s: &mut String, p : &mut String)-> usize{
@@ -29,4 +32,39 @@ fn calculate_len(s: &mut String)-> usize{
 fn print_hellow(s: &mut String){
     s.push_str(", ok");
     println!("{}", s);
+}
+
+fn example_1(){
+    let mut s = String::from("John");
+
+    let r1 = &s ;
+    let r2 = &s ;
+
+    println!("{} and {}", r1, r2);
+
+    let r3 = &mut s;
+    println!("{}", r3);
+}
+fn example_2(){
+    let mut s = String::from("John");
+
+    let r1 = &s ;
+    let r2 = &s ;
+    let r3 = &mut s;
+
+    println!("{} and {}", r1, r2);
+
+    println!("{}", r3);
+}
+
+fn example_3(){
+    let mut s = String::from("John");
+
+    let r1 = &s ;
+    let r2 = &s ;
+    let r3 = &mut s;
+    println!("{}", r3);
+
+    println!("{} and {}", r1, r2);
+
 }
