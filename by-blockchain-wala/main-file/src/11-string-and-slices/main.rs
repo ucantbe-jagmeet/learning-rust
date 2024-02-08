@@ -11,16 +11,13 @@ fn main(){
     // let world = &s[6..11];
     
     // println!("{world}")
-    
     let first = first_word(&s);
     
     // s.clear(); // now this gives error that "mutable borrow occurs here" , this is the correct way 
     println!{"first World{} is: {}", s, first}
-
 }
 
 // usize depend on system for example 32 bit , 64 bit
-
 fn first_word(s: &String) -> &str {
     let bytes = s.as_bytes();
     // println!("{:?}", bytes); // :? is required to print bytes 
