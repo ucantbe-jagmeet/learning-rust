@@ -1,16 +1,23 @@
 fn main(){
+    
     let jagmeet = User {
         active: true,
         username: String ::from("jagmeet_singh"),
         email: String ::from("jagmeet@mail.com"),
-        mobile_no: 8989898989
+        sign_in_count: 9999
     };
-    println!("{:#?}", jagmeet);
+    // println!("{:#?}", jagmeet);
     
     // tuples
-    let dog:(&str, &str, u64)= ("Bruno", "Mars", 10);
+    let dog:(&str, &str, u64) = ("Bruno", "Mars", 10);
     
-    println!("info ---- {}", dog.2); // we have to write number to get values from tupples
+    // println!("info ---- {}", dog.2); // we have to write number to get values from tuples
+
+
+    // #########################
+
+    let new_user = build_user(String::from("jag@gmail.com"), String::from("ucantbe"));
+    println!("{:#?}", new_user);
 }
 
 // custom data types - defined by user
@@ -19,5 +26,14 @@ struct User{
     active:bool,
     username: String,
     email: String,
-    mobile_no: u64,
+    sign_in_count: u64,
+}
+
+fn build_user(email: String, username: String) -> User {
+    User {
+        active: true,
+        username,
+        email,
+        sign_in_count:1
+    }
 }
