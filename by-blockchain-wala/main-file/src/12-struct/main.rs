@@ -14,7 +14,13 @@ fn main(){
 
     // #########################
     let new_user = build_user(String::from("jag@gmail.com"), String::from("ucantbe"));
-    println!("{:#?}", new_user);
+
+    let user2 = User {
+        email: String::from("user2@gmail.com"),
+        ..new_user
+    };
+    // println!("{:#?}", new_user);
+    println!("{:#?}", user2);
 }
 
 // custom data types - defined by user
