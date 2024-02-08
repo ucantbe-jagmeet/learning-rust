@@ -19,7 +19,9 @@ fn main(){
         email: String::from("user2@gmail.com"),
         ..new_user
     };
-    // println!("{:#?}", new_user);
+    // println!("{:#?}", new_user); // we cann not print new_user with user2 because user2 is using username from new_user so instead of copying its data it is taking ownership from new_user 
+
+    // we can print both structs if we can assign username by ourself after email
     println!("{:#?}", user2);
 }
 
