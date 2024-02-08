@@ -1,15 +1,26 @@
+#[derive(Debug)]
+
+struct Rectangle {
+    width : u32,
+    height : u32,
+}
+
+impl Rectangle{
+    fn area(&self) -> u32{
+        self.width * self.height
+    }
+}
+
 fn main(){
-    println!("methods and functions");
-}
 
-struct Aadhar{
-    name: String,
-    gender: String,
-    address: String
-}
+    let rect1 = Rectangle {
+        width : 15,
+        height: 35
+    };
 
-// this is called methods
-impl Aadhar{
-    fn create_user(user: Aadhar){}
-    fn update_user(user: Aadhar){}
+    println!(
+        "The area of rectangle is : {}",
+        rect1.area()
+    )
+
 }
