@@ -2,7 +2,7 @@ pub trait Summary{
     fn summarize(&self) -> String;
 }
 
-pub struct NewsArticle{
+pub struct NewsArticle {
     pub headline: String,
     pub location: String,
     pub author: String,
@@ -15,7 +15,7 @@ impl Summary for NewsArticle{
     }
 }
 
-pub struct Tweet{
+pub struct Tweet {
     pub username: String,
     pub content: String,
     pub reply: bool,
