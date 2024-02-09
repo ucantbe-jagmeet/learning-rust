@@ -21,7 +21,9 @@ fn main(){
     }
 
     let animal = Animal::Cat;
-    IfElse(animal);
+    // IfElse(animal);
+    MatchIt(animal);
+
 
 }
 
@@ -38,5 +40,12 @@ fn IfElse(animal : Animal) {
     else {
         println!("Unknown Creature");
     }
-    
+}
+
+fn MatchIt(animal : Animal) {
+    match animal {
+        Animal::Dog => println!("It's a Dog!"),
+        Animal::Cat => println!("It's a Cat!"),
+        Animal::Bird => println!("It's a Bird!"),
+    }
 }
