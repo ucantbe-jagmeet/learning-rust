@@ -1,5 +1,10 @@
 use std::cmp::PartialOrd;
 
+struct Point <T, U> {
+    x: T,
+    y: U
+}
+
 fn find_largest <T: PartialOrd>( list: &[T]) -> &T{
     let mut largest = &list[0];
     for number in list {
@@ -21,5 +26,9 @@ fn main(){
     let result3 = find_largest( &char_list);
 
     println!("largest number are: {}, {} and {}", result1, result2, result3);
+
+    let integer_num = Point { x: 5, y: 10};
+    let float_num = Point { x: 13.0, y: 4.0};
+    let mix_type_num = Point { x: 13, y: 4.0}; // extra case
 
 }
