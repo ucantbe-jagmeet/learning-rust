@@ -30,11 +30,9 @@ fn main(){
         _ => println!("The number is something else !")
     }
 
-
     let xyz = Coin::Nickel;
     let value = value_in_cents(xyz);
     println!("value is {}", value);
-
 
     // ####### Shape Example #######
     let shape = Shape::Circle( 144.0);
@@ -51,7 +49,5 @@ fn main(){
             println!("It's a Triangle whose sides are {}, {} and {}", s1, s2, s3);
         }
     }
-
-
 
 }
