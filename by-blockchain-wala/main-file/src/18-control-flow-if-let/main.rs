@@ -23,8 +23,9 @@ fn main(){
     let animal = Animal::Cat;
     // IfElse(animal);
     // MatchIt(animal);
-    IfLet(animal);
-
+    IfLet(animal); // if let will not print condition apart from if let function
+    // suppose there is Bear in enum and if we select Bear as a animal 
+    // then it will not print anything in terminal, hence it will not show any error
 
 }
 
@@ -47,7 +48,7 @@ fn MatchIt(animal : Animal) {
     match animal {
         Animal::Dog => println!("It's a Dog!"),
         Animal::Cat => println!("It's a Cat!"),
-        Animal::Bird => println!("It's a Bird!"),
+        // Animal::Bird => println!("It's a Bird!"),
     }
 }
 
