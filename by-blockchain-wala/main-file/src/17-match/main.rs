@@ -15,5 +15,13 @@ fn value_in_cents( coin: Coin) -> u8 {
 }
 
 fn main(){
+    let mut number: i32 = 13;
+    number = 3;
 
+    match number {
+        1 => println!("The number is one !"),
+        2 => println!("The number is two !"),
+        3 => println!("The number is three !"),
+        _ => println!("The number is something else !")
+    }
 }
