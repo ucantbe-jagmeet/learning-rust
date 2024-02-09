@@ -22,7 +22,8 @@ fn main(){
 
     let animal = Animal::Cat;
     // IfElse(animal);
-    MatchIt(animal);
+    // MatchIt(animal);
+    IfLet(animal);
 
 
 }
@@ -47,5 +48,17 @@ fn MatchIt(animal : Animal) {
         Animal::Dog => println!("It's a Dog!"),
         Animal::Cat => println!("It's a Cat!"),
         Animal::Bird => println!("It's a Bird!"),
+    }
+}
+
+fn IfLet(animal : Animal) {
+    if let Animal::Dog = animal {
+        println!("Its a Dog!");
+    }
+    else if let Animal::Cat = animal {
+        println!("Its a Cat!");
+    }
+    else if let Animal::Bird = animal {
+        println!("Its a Bird!");
     }
 }
