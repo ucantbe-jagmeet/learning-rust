@@ -16,6 +16,7 @@ enum Result < T, E> {
     panic -> By default when a panic occurs, the program starts unwinding, which means rust walks back up the stack and cleans up the data from each function it ecounters. However, this walking back and clean up is alot of work . Rust , therefore , allows you to choose the alternative of immediately aborting, which ends the program without cleaning up.
 */
 use std::fs::File;
+use std::io::ErrorKind;
 
 pub enum Result < T, E> {
         Ok(T),
@@ -31,6 +32,14 @@ fn main(){
 
     let greeting_file = match greeting_file_result {
         Ok(file) => file,
-        Err(error) => panic!("Problem opening the file: {:#?}", error),
+        Err(error) => match error.kind(){
+            ErrorKind::NotFound => match File::create("hello.txt"){
+                Ok(fc) => fc,
+                Err(error) => panic!("Problem creating the file: {:#?}", error),
+            },
+            other_error => {
+                panic!("Problem opening the file : {:?}", other_error);
+            }
+        },
     };
 }
