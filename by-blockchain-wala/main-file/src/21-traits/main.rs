@@ -2,6 +2,10 @@ pub trait Summary{
     fn summarize(&self) -> String;
 }
 
+fn notify( item: &impl Summary){
+    println!("Breaking news: {}", item.summarize())
+}
+
 pub struct NewsArticle {
     pub headline: String,
     pub location: String,
