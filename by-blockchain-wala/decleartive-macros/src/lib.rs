@@ -11,6 +11,9 @@ macro_rules! makevec {
         Vec::new()
     };
     ($element:expr) => {
+        vec![$element] 
+    };
+    ($element:expr) => {
 
       {  let mut x = Vec::new();
         x.push($element);
