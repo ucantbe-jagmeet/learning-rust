@@ -14,8 +14,6 @@ fn find_index( vec: Vec<i32>, element:i32) -> Option<usize>{
 }
 
 fn main(){
-    println!("Option in rust");
-
     let numbers = vec![ 1, 2, 3, 4, 5];
     let index = find_index( numbers, 4);
 
