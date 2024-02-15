@@ -9,5 +9,6 @@ fn main() {
     println!("Hello, world!");
     println!("Hello, world number {}!", 8);
     println!("Hello, worlds number {} and {}!", 8, 9);
-     println!("Hello, world number {}!", number());
+    println!("Hello, world number {}!", number());
+    let multiply_result = multiply(8, 9); 
 }
