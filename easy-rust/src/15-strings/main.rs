@@ -7,7 +7,7 @@ fn main() {
     let my_name = "Billybrobby";
     let my_country = "USA";
     let my_home = "Korea";
-
+    // The format! macro in Rust is used to create a String with formatted text. In your provided code, format! takes a format string and a list of arguments, then it interpolates the arguments into the format string's placeholders ({}) and returns a new String that contains the result. 
     let together = format!(
         "I am {} and I come from {} but I live in {}.",
         my_name, my_country, my_home
