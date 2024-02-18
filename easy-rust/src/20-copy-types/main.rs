@@ -15,6 +15,7 @@ fn main() {
                               // No problem, because my_number is copy type!
 
     // let country = String::from("Kiribati");
-    // prints_country(country);
+    // prints_country(country); // we have to clone it first
+    // prints_country(country.clone()); 
     // prints_country(country); // this will give error
 }
