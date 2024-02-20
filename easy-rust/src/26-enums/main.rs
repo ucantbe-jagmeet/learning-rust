@@ -22,6 +22,11 @@ enum Star {
     DeadStar, // Think about this one. What number will it have?
 }
 
+enum Number {
+    U32(u32),
+    I32(i32),
+}
+
 fn match_mood(mood: &Mood) -> i32 {
     use Mood::*;
     let happiness_level = match mood {
@@ -45,6 +50,14 @@ fn check_skystate(state: &ThingsInTheSky) {
         ThingsInTheSky::Sun(description) => println!("{}", description), // Give the string the name description so we can use it
         ThingsInTheSky::Stars(n) => println!("{}", n), // Or you can name it n. Or anything else - it doesn't matter
     }
+}
+
+fn get_number(input: i32) -> Number {
+    let number = match input.is_positive() {
+        true => Number::U32(input as u32),
+        false => Number::I32(input),
+    };
+    number
 }
 
 fn main() {
@@ -72,4 +85,13 @@ fn main() {
         }
     }
     println!("What about DeadStar? It's the number {}.", DeadStar as u32);
+
+    let my_vec = vec![get_number(-800), get_number(8)];
+
+    for item in my_vec {
+        match item {
+            Number::U32(number) => println!("It's a u32 with the value {}", number),
+            Number::I32(number) => println!("It's an i32 with the value {}", number),
+        }
+    }
 }
