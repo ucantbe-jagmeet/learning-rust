@@ -1,22 +1,19 @@
-// create the enum with two choices
 enum ThingsInTheSky {
-    Sun,
-    Stars,
+    Sun(String), // Now each variant has a string
+    Stars(String),
 }
 
-// With this function we can use an i32 to create ThingsInTheSky.
 fn create_skystate(time: i32) -> ThingsInTheSky {
     match time {
-        6..=18 => ThingsInTheSky::Sun, // Between 6 and 18 hours we can see the sun
-        _ => ThingsInTheSky::Stars,    // Otherwise, we can see stars
+        6..=18 => ThingsInTheSky::Sun(String::from("I can see the sun!")), // Write the strings here
+        _ => ThingsInTheSky::Stars(String::from("I can see the stars!")),
     }
 }
 
-// With this function we can match against the two choices in ThingsInTheSky.
 fn check_skystate(state: &ThingsInTheSky) {
     match state {
-        ThingsInTheSky::Sun => println!("I can see the sun!"),
-        ThingsInTheSky::Stars => println!("I can see the stars!"),
+        ThingsInTheSky::Sun(description) => println!("{}", description), // Give the string the name description so we can use it
+        ThingsInTheSky::Stars(n) => println!("{}", n), // Or you can name it n. Or anything else - it doesn't matter
     }
 }
 
