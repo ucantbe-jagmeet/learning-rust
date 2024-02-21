@@ -8,7 +8,7 @@
 
 // You often use a HashSet if you just want to know if a key exists, or doesn't exist.
 use std::collections::hash_map::*;
-use std::collections::{BTreeMap, HashMap, HashSet};
+use std::collections::{BTreeMap, BinaryHeap, HashMap, HashSet};
 
 struct City {
     name: String,
@@ -16,6 +16,13 @@ struct City {
     population: BTreeMap<u32, u32>,
 }
 
+fn show_remainder(input: &BinaryHeap<i32>) -> Vec<i32> {
+    let mut remainder_vec = vec![];
+    for number in input {
+        remainder_vec.push(*number)
+    }
+    remainder_vec
+}
 fn main() {
     // let mut tallinn = City {
     //     name: "Tallinn".to_string(),
@@ -151,7 +158,8 @@ fn main() {
 
     // ####################### Hashset ###############################
 
-    let many_numbers = vec![
+    /*
+        let many_numbers = vec![
         94, 42, 59, 64, 32, 22, 38, 5, 59, 49, 15, 89, 74, 29, 14, 68, 82, 80, 56, 41, 36, 81, 66,
         51, 58, 34, 59, 44, 19, 93, 28, 33, 18, 46, 61, 76, 14, 87, 84, 73, 71, 29, 94, 10, 35, 20,
         35, 80, 8, 43, 79, 25, 60, 26, 11, 37, 94, 32, 90, 51, 11, 28, 76, 16, 63, 95, 13, 60, 59,
@@ -183,5 +191,24 @@ fn main() {
     println!("It does not contain");
     for number in missing_vec {
         print!("{} ", number);
+    }
+     */
+
+    // ################## Binary heap #########################
+    let many_numbers = vec![0, 5, 10, 15, 20, 25, 30]; // These numbers are in order
+
+    let mut my_heap = BinaryHeap::new();
+
+    for number in many_numbers {
+        my_heap.push(number);
+    }
+
+    while let Some(number) = my_heap.pop() {
+        // .pop() returns Some(number) if a number is there, None if not. It pops from the front
+        println!(
+            "Popped off {}. Remaining numbers are: {:?}",
+            number,
+            show_remainder(&my_heap)
+        );
     }
 }
