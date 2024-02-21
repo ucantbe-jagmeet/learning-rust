@@ -65,13 +65,27 @@ fn main() {
         "Eye of the World",
     ]; // Eye of the World appears twice
 
+    // let mut book_hashmap = HashMap::new();
+    // // HashMap has a very interesting method called .entry() that you definitely want to try out. With it you can try to make an entry and use another method like .or_insert() to insert the value if there is no key. The interesting part is that it also gives a mutable reference so you can change it if you want. First is an example where we just insert true every time we insert a book title into the HashMap.
+    // for book in bool_collection {
+    //     book_hashmap.entry(book).or_insert(true);
+    // }
+
+    // for (book, true_or_false) in book_hashmap {
+    //     println!("Do we have {}? {}", book, true_or_false);
+    // }
+
     let mut book_hashmap = HashMap::new();
-    // HashMap has a very interesting method called .entry() that you definitely want to try out. With it you can try to make an entry and use another method like .or_insert() to insert the value if there is no key. The interesting part is that it also gives a mutable reference so you can change it if you want. First is an example where we just insert true every time we insert a book title into the HashMap.
-    for book in bool_collection {
-        book_hashmap.entry(book).or_insert(true);
+
+    book_hashmap.insert(1, "L'Allemagne Moderne");
+    book_hashmap.insert(1, "Le Petit Prince");
+    book_hashmap.insert(1, "섀도우 오브 유어 스마일");
+    book_hashmap.insert(1, "Eye of the World");
+
+    if book_hashmap.get(&1).is_none() {
+        // is_none() returns a bool: true if it's None, false if it's Some
+        book_hashmap.insert(1, "Le Petit Prince");
     }
 
-    for (book, true_or_false) in book_hashmap {
-        println!("Do we have {}? {}", book, true_or_false);
-    }
+    println!("{:?}", book_hashmap.get(&1));
 }
