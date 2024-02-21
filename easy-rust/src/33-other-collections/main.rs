@@ -171,4 +171,17 @@ fn main() {
         hashset_length,
         100 - hashset_length
     );
+
+    let mut missing_vec = vec![];
+
+    for number in 0..100 {
+        if number_hashset.get(&number).is_none() {
+            missing_vec.push(number);
+        }
+    }
+
+    println!("It does not contain");
+    for number in missing_vec {
+        print!("{} ", number);
+    }
 }
