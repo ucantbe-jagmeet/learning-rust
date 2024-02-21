@@ -25,6 +25,20 @@ fn prints_three_things(vector: Vec<i32>) {
     }
     println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
+fn get_fourth(input: &Vec<i32>) -> i32 {
+    let fourth = input.get(3).expect("Input vector needs at least 4 items");
+    *fourth
+}
+fn try_two_unwraps(input: Vec<Option<i32>>) {
+    println!(
+        "Index 0 is: {}",
+        input[0].expect("The first unwrap had a None!")
+    );
+    println!(
+        "Index 1 is: {}",
+        input[1].expect("The second unwrap had a None!")
+    );
+}
 fn main() {
     // let str_vec = vec!["Seven", "8", "9.0", "nice", "6060"];
 
@@ -57,4 +71,20 @@ fn main() {
     //     "You entered {}. Input must not equal Loki Laufeyson",
     //     my_name
     // );
+
+    //############### unwrap, expect and unwrap_or ############
+    let my_vec = vec![9, 0, 10];
+    // let fourth = get_fourth(&my_vec);
+    // print!("{}", fourth);
+
+    let vector = vec![None, Some(1000)];
+    // try_two_unwraps(vector);
+
+    let fourth = my_vec.get(3).unwrap_or(&0);
+    // If .get doesn't work, we will make the value &0.
+    // .get returns a reference, so we need &0 and not 0
+    // You can write "let *fourth" with a * if you want fourth to be
+    // a 0 and not a &0, but here we just print so it doesn't matter
+
+    println!("{}", fourth);
 }
