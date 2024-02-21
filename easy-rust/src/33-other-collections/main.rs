@@ -3,8 +3,12 @@
 // If you want a HashMap that you can sort, you can use a BTreeMap
 
 // If a HashMap already has a key when you try to put it in, it will overwrite its value:
+
+// A HashSet is actually a HashMap that only has keys . A hash set implemented as a HashMap where the value is (). So it's a HashMap with keys, no values.
+
+// You often use a HashSet if you just want to know if a key exists, or doesn't exist.
 use std::collections::hash_map::*;
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, HashMap, HashSet};
 
 struct City {
     name: String,
@@ -124,24 +128,47 @@ fn main() {
     // }
 
     //#################### use of entry #############################
-    let data = vec![
-        // This is the raw data
-        ("male", 9),
-        ("female", 5),
-        ("male", 0),
-        ("female", 6),
-        ("female", 5),
-        ("male", 10),
+    // let data = vec![
+    //     // This is the raw data
+    //     ("male", 9),
+    //     ("female", 5),
+    //     ("male", 0),
+    //     ("female", 6),
+    //     ("female", 5),
+    //     ("male", 10),
+    // ];
+
+    // let mut survey_hash = HashMap::new();
+
+    // for item in data {
+    //     // This gives a tuple of (&str, i32)
+    //     survey_hash.entry(item.0).or_insert(Vec::new()).push(item.1); // This pushes the number into the Vec inside
+    // }
+
+    // for (male_or_female, numbers) in survey_hash {
+    //     println!("{:?}: {:?}", male_or_female, numbers);
+    // }
+
+    // ####################### Hashset ###############################
+
+    let many_numbers = vec![
+        94, 42, 59, 64, 32, 22, 38, 5, 59, 49, 15, 89, 74, 29, 14, 68, 82, 80, 56, 41, 36, 81, 66,
+        51, 58, 34, 59, 44, 19, 93, 28, 33, 18, 46, 61, 76, 14, 87, 84, 73, 71, 29, 94, 10, 35, 20,
+        35, 80, 8, 43, 79, 25, 60, 26, 11, 37, 94, 32, 90, 51, 11, 28, 76, 16, 63, 95, 13, 60, 59,
+        96, 95, 55, 92, 28, 3, 17, 91, 36, 20, 24, 0, 86, 82, 58, 93, 68, 54, 80, 56, 22, 67, 82,
+        58, 64, 80, 16, 61, 57, 14, 11,
     ];
 
-    let mut survey_hash = HashMap::new();
+    let mut number_hashset = HashSet::new();
 
-    for item in data {
-        // This gives a tuple of (&str, i32)
-        survey_hash.entry(item.0).or_insert(Vec::new()).push(item.1); // This pushes the number into the Vec inside
+    for number in many_numbers {
+        number_hashset.insert(number);
     }
 
-    for (male_or_female, numbers) in survey_hash {
-        println!("{:?}: {:?}", male_or_female, numbers);
-    }
+    let hashset_length = number_hashset.len();
+    println!(
+        "There are {} unique numbers, so we are missing {}.",
+        hashset_length,
+        100 - hashset_length
+    );
 }
