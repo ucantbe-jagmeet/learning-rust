@@ -1,3 +1,12 @@
+/*
+An iterator is a construct that can give you the items in the collection, one at a time. Actually, we have already used iterators a lot: the for loop gives you an iterator. When you want to use an iterator other times, you have to choose what kind:
+
+.iter() for an iterator of references
+.iter_mut() for an iterator of mutable references
+.into_iter() for an iterator of values (not references)
+
+*/
+
 fn main() {
     let vector1 = vec![1, 2, 3]; // we will use .iter() and .into_iter() on this one
     let vector1_a = vector1.iter().map(|x| x + 1).collect::<Vec<i32>>();
