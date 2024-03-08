@@ -1,5 +1,5 @@
 // Closures are like quick functions that don't need a name. Sometimes they are called lambdas
-
+use std::collections::HashMap;
 fn main() {
     /*
         let my_closure = |x: i32| println!("{}", x);
@@ -59,4 +59,20 @@ fn main() {
     // In this case we use for_each instead of map. map is for doing something to each item and passing it on, and for_each is doing something when you see each item. Also, map doesn't do anything unless you use a method like collect.
 
     //Actually, this is the interesting thing about iterators. If you try to map without a method like collect, the compiler will tell you that it doesn't do anything. It won't panic, but the compiler will tell you that you didn't do anything.
+
+    let some_numbers = vec![0, 1, 2, 3, 4, 5]; // a Vec<i32>
+    let some_words = vec!["zero", "one", "two", "three", "four", "five"]; // a Vec<&str>
+
+    let number_word_hashmap = some_numbers
+        .into_iter() // now it is an iter
+        .zip(some_words.into_iter()) // inside .zip() we put in the other iter. Now they are together.
+        .collect::<HashMap<_, _>>();
+
+    // println!(
+    //     "For key {} we get {}.",
+    //     2,
+    //     number_word_hashmap.get(&2).unwrap()
+    // );
+
+    // ####### |_| in a closure ###########
 }
