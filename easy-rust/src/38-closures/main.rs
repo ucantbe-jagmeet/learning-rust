@@ -60,13 +60,13 @@ fn main() {
 
     //Actually, this is the interesting thing about iterators. If you try to map without a method like collect, the compiler will tell you that it doesn't do anything. It won't panic, but the compiler will tell you that you didn't do anything.
 
-    let some_numbers = vec![0, 1, 2, 3, 4, 5]; // a Vec<i32>
-    let some_words = vec!["zero", "one", "two", "three", "four", "five"]; // a Vec<&str>
+    // let some_numbers = vec![0, 1, 2, 3, 4, 5]; // a Vec<i32>
+    // let some_words = vec!["zero", "one", "two", "three", "four", "five"]; // a Vec<&str>
 
-    let number_word_hashmap = some_numbers
-        .into_iter() // now it is an iter
-        .zip(some_words.into_iter()) // inside .zip() we put in the other iter. Now they are together.
-        .collect::<HashMap<_, _>>();
+    // let number_word_hashmap = some_numbers
+    //     .into_iter() // now it is an iter
+    //     .zip(some_words.into_iter()) // inside .zip() we put in the other iter. Now they are together.
+    //     .collect::<HashMap<_, _>>();
 
     // println!(
     //     "For key {} we get {}.",
@@ -75,4 +75,28 @@ fn main() {
     // );
 
     // ####### |_| in a closure ###########
+
+    let months = vec![
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
+    let filtered_months = months
+        .into_iter() // make an iter
+        .filter(|month| month.len() < 5) // We don't want months more than 5 bytes in length.
+        // We know that each letter is one byte so .len() is fine
+        .filter(|month| month.contains("u")) // Also we only like months with the letter u
+        .collect::<Vec<&str>>();
+
+    println!("{:?}", filtered_months);
 }
