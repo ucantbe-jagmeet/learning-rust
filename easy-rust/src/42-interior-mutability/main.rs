@@ -54,7 +54,8 @@ fn main() {
          */
 
     //######## Mutex ##############
-    let my_mutex = Mutex::new(5); // A new Mutex<i32>. We don't need to say mut
+    /*
+      let my_mutex = Mutex::new(5); // A new Mutex<i32>. We don't need to say mut
     let mut mutex_changer = my_mutex.lock().unwrap(); // mutex_changer is a MutexGuard
                                                       // It has to be mut because we will change it
                                                       // Now it has access to the Mutex
@@ -69,4 +70,28 @@ fn main() {
     *mutex_changer = 6; // mutex_changer is a MutexGuard<i32> so we use * to change the i32
 
     println!("{:?}", mutex_changer);
+      */
+    //But mutex_changer still has a lock after it is done. How do we stop it? A Mutex is unlocked when the MutexGuard goes out of scope. "Go out of scope" means the code block is finished. For example:
+    /*
+       let my_mutex = Mutex::new(5);
+    {
+        let mut mutex_changer = my_mutex.lock().unwrap();
+        *mutex_changer = 6;
+    } // mutex_changer goes out of scope - now it is gone. It is not locked anymore
+
+    println!("{:?}", my_mutex); // Now it says: Mutex { data: 6 }
+     */
+
+    //If you don't want to use a different {} code block, you can use std::mem::drop(mutex_changer). std::mem::drop means "make this go out of scope"
+
+    /*
+
+    let my_mutex = Mutex::new(5);
+    let mut mutex_changer = my_mutex.lock().unwrap();
+    *mutex_changer = 6;
+    std::mem::drop(mutex_changer); // drop mutex_changer - it is gone now
+                                   // and my_mutex is unlocked
+
+    println!("{:?}", my_mutex); // Now it says: Mutex { data: 6 }
+    */
 }
