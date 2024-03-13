@@ -1,5 +1,28 @@
 // Closures are like quick functions that don't need a name. Sometimes they are called lambdas
 use std::collections::HashMap;
+
+struct Company {
+    name: String,
+    ceo: Option<String>,
+}
+
+impl Company {
+    fn new(name: &str, ceo: &str) -> Self {
+        let ceo = match ceo {
+            "" => None,
+            ceo => Some(ceo.to_string()),
+        };
+        Self {
+            name: name.to_string(),
+            ceo,
+        }
+    }
+
+    fn get_ceo(&self) -> Option<String> {
+        self.ceo.clone()
+    }
+}
+
 fn main() {
     /*
         let my_closure = |x: i32| println!("{}", x);
@@ -63,20 +86,22 @@ fn main() {
     // let some_numbers = vec![0, 1, 2, 3, 4, 5]; // a Vec<i32>
     // let some_words = vec!["zero", "one", "two", "three", "four", "five"]; // a Vec<&str>
 
-    // let number_word_hashmap = some_numbers
-    //     .into_iter() // now it is an iter
-    //     .zip(some_words.into_iter()) // inside .zip() we put in the other iter. Now they are together.
-    //     .collect::<HashMap<_, _>>();
+    /*
+    let number_word_hashmap = some_numbers
+        .into_iter() // now it is an iter
+        .zip(some_words.into_iter()) // inside .zip() we put in the other iter. Now they are together.
+        .collect::<HashMap<_, _>>();
 
-    // println!(
-    //     "For key {} we get {}.",
-    //     2,
-    //     number_word_hashmap.get(&2).unwrap()
-    // );
+    println!(
+        "For key {} we get {}.",
+        2,
+        number_word_hashmap.get(&2).unwrap()
+    );
+    */
 
     // ####### |_| in a closure ###########
-
-    let months = vec![
+    /*
+     let months = vec![
         "January",
         "February",
         "March",
@@ -99,4 +124,23 @@ fn main() {
         .collect::<Vec<&str>>();
 
     println!("{:?}", filtered_months);
+    */
+
+    let company_vec = vec![
+        Company::new("Umbrella Corporation", "Unknown"),
+        Company::new("Ovintiv", "Doug Suttles"),
+        Company::new("The Red-Headed League", ""),
+        Company::new("Stark Enterprises", ""),
+    ];
+
+    let all_the_ceos = company_vec
+        .into_iter()
+        .filter_map(|company| company.get_ceo())
+        .collect::<Vec<String>>();
+
+    println!("{:?}", all_the_ceos);
+
+    /*
+    Since .filter_map() needs an Option, what about Result? No problem: there is a method called .ok() that turns Result into Option. It is called .ok() because all it can send is the Ok result (the Err information is gone). You remember that Option is Option<T> while Result is Result<T, E> with information for both Ok and Err. So when you use .ok(), any Err information is lost and it becomes None.
+    */
 }
