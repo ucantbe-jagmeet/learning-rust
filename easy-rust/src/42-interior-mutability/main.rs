@@ -1,3 +1,5 @@
+//Rust has many ways to allow some safe mutability inside of something that is immutable. The most simple way is called Cell.
+
 use std::cell::Cell;
 
 struct PhoneModel {
