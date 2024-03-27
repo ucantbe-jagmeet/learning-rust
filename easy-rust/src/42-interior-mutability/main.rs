@@ -1,8 +1,8 @@
 //Rust has many ways to allow some safe mutability inside of something that is immutable. The most simple way is called Cell.
 //A RefCell is another way to change values without needing to declare mut. It means "reference cell", and is like a Cell but uses references instead of copies.
 use std::cell::{Cell, RefCell};
-use std::sync::Mutex;
-
+use std::mem::drop;
+use std::sync::{Mutex, RwLock};
 #[derive(Debug)]
 struct User {
     id: u32,
@@ -93,5 +93,17 @@ fn main() {
                                    // and my_mutex is unlocked
 
     println!("{:?}", my_mutex); // Now it says: Mutex { data: 6 }
+    */
+
+    //################# Mutex #########################
+    /*
+    let my_rwlock = RwLock::new(5);
+
+    let read1 = my_rwlock.read().unwrap(); // one .read() is fine
+    let read2 = my_rwlock.read().unwrap(); // two .read()s is also fine
+
+    println!("{:?}, {:?}", read1, read2);
+
+    let write1 = my_rwlock.write().unwrap(); // uh oh, now the program will wait forever
     */
 }
