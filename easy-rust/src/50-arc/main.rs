@@ -1,5 +1,16 @@
 //Arc means "atomic reference counter". Atomic means that it uses the computer's processor so that data only gets written once each time. This is important because if two threads write data at the same time, you will get the wrong result
 use std::sync::{Arc, Mutex};
+use std::thread::spawn;
+
+fn make_arc(number: i32) -> Arc<Mutex<i32>> {
+    // Just a function to make a Mutex in an Arc
+    Arc::new(Mutex::new(number))
+}
+
+fn new_clone(input: &Arc<Mutex<i32>>) -> Arc<Mutex<i32>> {
+    // Just a function so we can write new_clone
+    Arc::clone(&input)
+}
 fn main() {
     /*
     let thread1 = std::thread::spawn(|| {
@@ -53,7 +64,6 @@ fn main() {
     */
 
     // Then we can join the two threads together in a single for loop, and make the code smaller.
-
     // We need to save the handles so we can call .join() on each one outside of the loop. If we do this inside the loop, it will wait for the first thread to finish before starting the new one.
 
     /*
@@ -74,4 +84,24 @@ fn main() {
     handle_vec.into_iter().for_each(|handle| handle.join().unwrap()); // call join on all handles
     println!("{:?}", my_number);
     */
+
+    let mut handle_vec = vec![]; // each handle will go in here
+    let my_number = make_arc(0);
+
+    for _ in 0..2 {
+        let my_number_clone = new_clone(&my_number);
+        let handle = spawn(move || {
+            for _ in 0..10 {
+                let mut value_inside = my_number_clone.lock().unwrap();
+                *value_inside += 1;
+            }
+        });
+        handle_vec.push(handle); // the handle is done, so put it in the vector
+    }
+
+    handle_vec
+        .into_iter()
+        .for_each(|handle| handle.join().unwrap()); // Make each one wait
+
+    println!("{:?}", my_number);
 }
