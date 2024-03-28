@@ -69,6 +69,10 @@ fn main() {
     };
 
     println!("Calgary's history is: {}", calgary.city_history);
-    println!("{}", Rc::strong_count(&calgary.city_history));
+    println!("{}", Rc::strong_count(&calgary.city_history)); // this prints 2
+    println!("{}", Rc::weak_count(&calgary.city_history));
     let new_owner = calgary.city_history.clone();
+    println!("{}", Rc::strong_count(&calgary.city_history)); // this prints 3
+
+    // note -> So if there are strong pointers, are there weak pointers? Yes, there are. Weak pointers are useful because if two Rcs point at each other, they can't die. This is called a "reference cycle". If item 1 has an Rc to item 2, and item 2 has an Rc to item 1, they can't get to 0. In this case you want to use weak references. Then Rc will count the references, but if it only has weak references then it can die. You use Rc::downgrade(&item) instead of Rc::clone(&item) to make weak references. Also, you use Rc::weak_count(&item) to see the weak count.
 }
