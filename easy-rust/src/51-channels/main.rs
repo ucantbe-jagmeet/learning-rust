@@ -31,17 +31,23 @@ fn main() {
 
     let (sender, receiver) = channel();
     let sender_clone = sender.clone();
-    let mut handle_vec = vec![];
+    let mut handle_vec = vec![]; // Put our handles in here
+    let mut results_vec = vec![];
 
     handle_vec.push(std::thread::spawn(move || {
+        // push this into the vec
         sender.send("Send a &str this time").unwrap();
     }));
 
     handle_vec.push(std::thread::spawn(move || {
-        sender.send("And here is the anther &str").unwrap();
+        // and push this into the vec
+        sender_clone.send("And here is another &str").unwrap();
     }));
 
     for _ in handle_vec {
-        println!("{:?}", receiver.recv().unwrap());
+        // now handle_vec has 2 items. Let's print them
+        results_vec.push(receiver.recv().unwrap());
     }
+
+    println!("{:?}", results_vec);
 }
