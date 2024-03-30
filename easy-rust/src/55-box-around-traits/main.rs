@@ -28,7 +28,6 @@ impl fmt::Display for ErrorTwo {
 // Make a function that just returns a String or an error
 fn returns_errors(input: u8) -> Result<String, Box<dyn Error>> {
     // With Box<dyn Error> you can return anything that has the Error trait
-
     match input {
         0 => Err(Box::new(ErrorOne)), // Don't forget to put it in a box
         1 => Err(Box::new(ErrorTwo)),
