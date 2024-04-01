@@ -35,6 +35,13 @@ enum EnumOfNumbers {
     I8(i8),
     AnotherI8(i8),
     OneMoreI8(i8),
+fn returns_errors(input: u8) -> Result<String, Box<dyn Error>> {
+    // With Box<dyn Error> you can return anything that has the Error trait
+    match input {
+        0 => Err(Box::new(ErrorOne)), // Don't forget to put it in a box
+        1 => Err(Box::new(ErrorTwo)),
+        _ => Ok("Looks fine to me".to_string()), // This is the success type
+    }
 }
 impl JustATrait for EnumOfNumbers {}
 
