@@ -60,6 +60,8 @@ mod print_things {
     }
 }
 
+/*
+
 mod country {
     // The main mod doesn't need pub
     fn print_country(country: &str) {
@@ -92,4 +94,35 @@ fn main() {
     my_billy.print_billy();
 
     crate::country::province::city::print_city("Canada", "New Brunswick", "Moncton");
+}
+
+*/
+
+mod country {
+    fn print_country(country: &str) {
+        println!("We are in the country of {}", country);
+    }
+    pub mod province {
+        fn print_province(province: &str) {
+            println!("in the province of {}", province);
+        }
+
+        pub mod city {
+            use super::super::*; // use everything in "above above": that means mod country
+            use super::*; // use everything in "above": that means mod province
+
+            pub fn print_city(country: &str, province: &str, city: &str) {
+                print_country(country);
+                print_province(province);
+                println!("in the city of {}", city);
+            }
+        }
+    }
+}
+
+fn main() {
+    use crate::country::province::city::print_city; // bring in the function
+
+    print_city("Canada", "New Brunswick", "Moncton");
+    print_city("Korea", "Gyeonggi-do", "Gwangju"); // Now it's less work to use it again
 }
