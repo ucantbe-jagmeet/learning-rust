@@ -35,7 +35,7 @@ fn main() {
     println!("{}", num_vec.capacity()); // prints 8. We have 5 elements, but it doubled 4 to 8 to make space
 
     /*
-         let mut num_vec = Vec::with_capacity(8); // Give it capacity 8
+        let mut num_vec = Vec::with_capacity(8); // Give it capacity 8
     num_vec.push('a'); // add one character
     println!("{}", num_vec.capacity()); // prints 8
     num_vec.push('a'); // add one more
