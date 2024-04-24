@@ -1,90 +1,207 @@
+// We have seen traits before: Debug, Copy, Clone are all traits. To give a type a trait, you have to implement it.
+
+//The important thing to remember about traits is that they are about behaviour. To make a trait, write trait and then create some functions.
+
 /*
-There are three other macros that are similar to panic! that you use a lot in testing. They are: assert!, assert_eq!, and assert_ne!.
+#[derive(Debug)]
+struct Animal {
+    // simple struct an animal only has a name
+    name: String,
+}
 
-Here is what they mean:
+trait Dog {
+    // a dog trait gives some functionality
+    fn bark(&self);
+    fn run(&self);
+}
 
-assert!(): if the part inside () is not true, the program will panic.
-assert_eq!(): the two items inside () must be equal.
-assert_ne!(): the two items inside () must not be equal. (ne means not equal)
+impl Dog for Animal {
+    // now Animal has the trait dog
+    fn run(&self) {
+        println!("{} stop barking!", self.name);
+    }
+    fn bark(&self) {
+        println!("{} is running!", self.name);
+    }
+}
+
+fn main() {
+    let rover = Animal {
+        name: "Rover".to_string(),
+    };
+
+    rover.bark();
+    rover.run();
+}
+*/
+/*
+#[derive(Debug)]
+struct Cat {
+    name: String,
+    age: u8,
+}
+
+fn main() {
+    let mr_mantle = Cat {
+        name: "Reggie Mantle".to_string(),
+        age: 4,
+    };
+
+    println!("Mr. Mantle is a {:?}", mr_mantle)
+}
 */
 
-use std::num::ParseIntError;
+/*
+use std::fmt;
 
-fn parse_str(input: &str) -> Result<i32, ParseIntError> {
-    let parsed_number = input
-        .parse::<u16>()?
-        .to_string()
-        .parse::<u32>()?
-        .to_string()
-        .parse::<i32>()?; // Add a ? each time to check and pass it on
-    Ok(parsed_number)
+struct Cat {
+    name: String,
+    age: u8,
 }
-fn prints_three_things(vector: Vec<i32>) {
-    if vector.len() != 3 {
-        panic!("my_vec must always have three items") // will panic if the length is not 3
+
+impl fmt::Display for Cat {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{} is a cat who is {} years old.", self.name, self.age)
     }
-    println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
-fn get_fourth(input: &Vec<i32>) -> i32 {
-    let fourth = input.get(3).expect("Input vector needs at least 4 items");
-    *fourth
+fn print_cats(pet: String) {
+    println!("{}", pet);
 }
-fn try_two_unwraps(input: Vec<Option<i32>>) {
-    println!(
-        "Index 0 is: {}",
-        input[0].expect("The first unwrap had a None!")
-    );
-    println!(
-        "Index 1 is: {}",
-        input[1].expect("The second unwrap had a None!")
-    );
-}
+
 fn main() {
-    // let str_vec = vec!["Seven", "8", "9.0", "nice", "6060"];
-
-    // for item in str_vec {
-    //     let parsed = parse_str(item);
-    //     println!("{:?}", parsed);
-    // }
-
-    // let my_vec = vec![8, 9, 10, 10, 55, 99];
-    // prints_three_things(my_vec);
-
-    // let my_name = "Loki Laufeyson";
-
-    // assert!(my_name == "Loki Laufeyson");
-    // assert_eq!(my_name, "Loki Laufeyson");
-    // assert_ne!(my_name, "Mithridates");
-    // // These messages will only display if the program panics. So if you run this:
-    // assert!(
-    //     my_name == "Loki Laufeyson",
-    //     "{} should be Loki Laufeyson",
-    //     my_name
-    // );
-    // assert_eq!(
-    //     my_name, "Loki Laufeyson",
-    //     "{} and Loki Laufeyson should be equal",
-    //     my_name
-    // );
-    // assert_ne!(
-    //     my_name, "Loki Laufeyson",
-    //     "You entered {}. Input must not equal Loki Laufeyson",
-    //     my_name
-    // );
-
-    //############### unwrap, expect and unwrap_or ############
-    let my_vec = vec![9, 0, 10];
-    // let fourth = get_fourth(&my_vec);
-    // print!("{}", fourth);
-
-    let vector = vec![None, Some(1000)];
-    // try_two_unwraps(vector);
-
-    let fourth = my_vec.get(3).unwrap_or(&0);
-    // If .get doesn't work, we will make the value &0.
-    // .get returns a reference, so we need &0 and not 0
-    // You can write "let *fourth" with a * if you want fourth to be
-    // a 0 and not a &0, but here we just print so it doesn't matter
-
-    println!("{}", fourth);
+    let mr_mantle = Cat {
+        name: "Reggie Mantle".to_string(),
+        age: 4,
+    };
+    print_cats(mr_mantle.to_string());
+    println!(
+        "Mr. mantle's string is {} letters long",
+        mr_mantle.to_string().chars().count()
+    );
 }
+
+*/
+
+/*
+struct Monster {
+    health: i32,
+}
+
+struct Wizard {}
+struct Ranger {}
+
+trait FightClose {
+    fn attack_with_sword(&self, opponent: &mut Monster) {
+        opponent.health -= 10;
+        println!(
+            "You attack with your sword. Your opponent now has {} health left.",
+            opponent.health
+        );
+    }
+    fn attack_with_hand(&self, opponent: &mut Monster) {
+        opponent.health -= 2;
+        println!(
+            "You attack with your hand. Your opponent now has {} health left.",
+            opponent.health
+        );
+    }
+}
+impl FightClose for Wizard {}
+impl FightClose for Ranger {}
+
+trait FightFromDistance {
+    fn attack_with_bow(&self, opponent: &mut Monster, distance: u32) {
+        if distance < 10 {
+            opponent.health -= 10;
+            println!(
+                "You attack with your bow. Your opponent now has {} health left.",
+                opponent.health
+            );
+        }
+    }
+    fn attack_with_rock(&self, opponent: &mut Monster, distance: u32) {
+        if distance < 3 {
+            opponent.health -= 4;
+        }
+        println!(
+            "You attack with your rock. Your opponent now has {} health left.",
+            opponent.health
+        );
+    }
+}
+impl FightFromDistance for Ranger {}
+
+fn main() {
+    let radagast = Wizard {};
+    let aragorn = Ranger {};
+
+    let mut uruk_hai = Monster { health: 40 };
+
+    radagast.attack_with_sword(&mut uruk_hai);
+    aragorn.attack_with_bow(&mut uruk_hai, 8);
+}
+
+*/
+/*
+use std::fmt::Debug;  // So we don't have to write std::fmt::Debug every time now
+
+struct Monster {
+    health: i32,
+}
+
+#[derive(Debug)]
+struct Wizard {
+    health: i32,
+}
+#[derive(Debug)]
+struct Ranger {
+    health: i32,
+}
+
+trait Magic{} // No methods for any of these traits. They are just trait bounds
+trait FightClose {}
+trait FightFromDistance {}
+
+impl FightClose for Ranger{} // Each type gets FightClose,
+impl FightClose for Wizard {}
+impl FightFromDistance for Ranger{} // but only Ranger gets FightFromDistance
+impl Magic for Wizard{}  // and only Wizard gets Magic
+
+fn attack_with_bow<T: FightFromDistance + Debug>(character: &T, opponent: &mut Monster, distance: u32) {
+    if distance < 10 {
+        opponent.health -= 10;
+        println!(
+            "You attack with your bow. Your opponent now has {} health left.  You are now at: {:?}",
+            opponent.health, character
+        );
+    }
+}
+
+fn attack_with_sword<T: FightClose + Debug>(character: &T, opponent: &mut Monster) {
+    opponent.health -= 10;
+    println!(
+        "You attack with your sword. Your opponent now has {} health left. You are now at: {:?}",
+        opponent.health, character
+    );
+}
+
+fn fireball<T: Magic + Debug>(character: &T, opponent: &mut Monster, distance: u32) {
+    if distance < 15 {
+        opponent.health -= 20;
+        println!("You raise your hands and cast a fireball! Your opponent now has {} health left. You are now at: {:?}",
+    opponent.health, character);
+    }
+}
+
+fn main() {
+    let radagast = Wizard { health: 60 };
+    let aragorn = Ranger { health: 80 };
+
+    let mut uruk_hai = Monster { health: 40 };
+
+    attack_with_sword(&radagast, &mut uruk_hai);
+    attack_with_bow(&aragorn, &mut uruk_hai, 8);
+    fireball(&radagast, &mut uruk_hai, 8);
+}
+
+*/
