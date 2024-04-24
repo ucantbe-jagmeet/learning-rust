@@ -1,64 +1,90 @@
-use std::fmt::Debug; // So we don't have to write std::fmt::Debug every time now
+/*
+There are three other macros that are similar to panic! that you use a lot in testing. They are: assert!, assert_eq!, and assert_ne!.
 
-struct Monster {
-    health: i32,
+Here is what they mean:
+
+assert!(): if the part inside () is not true, the program will panic.
+assert_eq!(): the two items inside () must be equal.
+assert_ne!(): the two items inside () must not be equal. (ne means not equal)
+*/
+
+use std::num::ParseIntError;
+
+fn parse_str(input: &str) -> Result<i32, ParseIntError> {
+    let parsed_number = input
+        .parse::<u16>()?
+        .to_string()
+        .parse::<u32>()?
+        .to_string()
+        .parse::<i32>()?; // Add a ? each time to check and pass it on
+    Ok(parsed_number)
 }
-
-#[derive(Debug)]
-struct Wizard {
-    health: i32,
-}
-#[derive(Debug)]
-struct Ranger {
-    health: i32,
-}
-
-trait Magic {} // No methods for any of these traits. They are just trait bounds
-trait FightClose {}
-trait FightFromDistance {}
-
-impl FightClose for Ranger {} // Each type gets FightClose,
-impl FightClose for Wizard {}
-impl FightFromDistance for Ranger {} // but only Ranger gets FightFromDistance
-impl Magic for Wizard {} // and only Wizard gets Magic
-
-fn attack_with_bow<T: FightFromDistance + Debug>(
-    character: &T,
-    opponent: &mut Monster,
-    distance: u32,
-) {
-    if distance < 10 {
-        opponent.health -= 10;
-        println!(
-            "You attack with your bow. Your opponent now has {} health left.  You are now at: {:?}",
-            opponent.health, character
-        );
+fn prints_three_things(vector: Vec<i32>) {
+    if vector.len() != 3 {
+        panic!("my_vec must always have three items") // will panic if the length is not 3
     }
+    println!("{}, {}, {}", vector[0], vector[1], vector[2]);
 }
-
-fn attack_with_sword<T: FightClose + Debug>(character: &T, opponent: &mut Monster) {
-    opponent.health -= 10;
+fn get_fourth(input: &Vec<i32>) -> i32 {
+    let fourth = input.get(3).expect("Input vector needs at least 4 items");
+    *fourth
+}
+fn try_two_unwraps(input: Vec<Option<i32>>) {
     println!(
-        "You attack with your sword. Your opponent now has {} health left. You are now at: {:?}",
-        opponent.health, character
+        "Index 0 is: {}",
+        input[0].expect("The first unwrap had a None!")
+    );
+    println!(
+        "Index 1 is: {}",
+        input[1].expect("The second unwrap had a None!")
     );
 }
-
-fn fireball<T: Magic + Debug>(character: &T, opponent: &mut Monster, distance: u32) {
-    if distance < 15 {
-        opponent.health -= 20;
-        println!("You raise your hands and cast a fireball! Your opponent now has {} health left. You are now at: {:?}",
-    opponent.health, character);
-    }
-}
-
 fn main() {
-    let radagast = Wizard { health: 60 };
-    let aragorn = Ranger { health: 80 };
+    // let str_vec = vec!["Seven", "8", "9.0", "nice", "6060"];
 
-    let mut uruk_hai = Monster { health: 40 };
+    // for item in str_vec {
+    //     let parsed = parse_str(item);
+    //     println!("{:?}", parsed);
+    // }
 
-    attack_with_sword(&radagast, &mut uruk_hai);
-    attack_with_bow(&aragorn, &mut uruk_hai, 8);
-    fireball(&radagast, &mut uruk_hai, 8);
+    // let my_vec = vec![8, 9, 10, 10, 55, 99];
+    // prints_three_things(my_vec);
+
+    // let my_name = "Loki Laufeyson";
+
+    // assert!(my_name == "Loki Laufeyson");
+    // assert_eq!(my_name, "Loki Laufeyson");
+    // assert_ne!(my_name, "Mithridates");
+    // // These messages will only display if the program panics. So if you run this:
+    // assert!(
+    //     my_name == "Loki Laufeyson",
+    //     "{} should be Loki Laufeyson",
+    //     my_name
+    // );
+    // assert_eq!(
+    //     my_name, "Loki Laufeyson",
+    //     "{} and Loki Laufeyson should be equal",
+    //     my_name
+    // );
+    // assert_ne!(
+    //     my_name, "Loki Laufeyson",
+    //     "You entered {}. Input must not equal Loki Laufeyson",
+    //     my_name
+    // );
+
+    //############### unwrap, expect and unwrap_or ############
+    let my_vec = vec![9, 0, 10];
+    // let fourth = get_fourth(&my_vec);
+    // print!("{}", fourth);
+
+    let vector = vec![None, Some(1000)];
+    // try_two_unwraps(vector);
+
+    let fourth = my_vec.get(3).unwrap_or(&0);
+    // If .get doesn't work, we will make the value &0.
+    // .get returns a reference, so we need &0 and not 0
+    // You can write "let *fourth" with a * if you want fourth to be
+    // a 0 and not a &0, but here we just print so it doesn't matter
+
+    println!("{}", fourth);
 }
