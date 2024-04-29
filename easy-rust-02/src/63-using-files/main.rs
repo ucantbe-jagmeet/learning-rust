@@ -19,10 +19,8 @@ fn main() -> std::io::Result<()> {
     //                                                     // it will delete everything in it.
     // file.write_all(b"Let's put this in the file")?; // Don't forget the b in front of ". That's because files take bytes.
     // Ok(())
-
     // fs::File::create("myfilename.txt")?.write_all(b"Let's put this in the file")?;
     // Ok(())
-
     // fs::write("calvin_with_dad.txt",
     // "Calvin: Dad, how come old photographs are always black and white? Didn't they have color film back then?
     // Dad: Sure they did. In fact, those photographs *are* in color. It's just the *world* was black and white then.
