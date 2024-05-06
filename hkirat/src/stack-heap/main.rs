@@ -9,6 +9,8 @@
 fn main() {
     stack_fn(); // call the function that uses the stack memory
     heap_fn(); // call the function that uses the heap memory
+
+    update_string(); // call the function that changes the size of vairbale at runtime
 }
 
 fn stack_fn() {
@@ -24,4 +26,11 @@ fn heap_fn() {
     let combined = format!("{} {}", s1, s2);
 
     println!("heap function: Combined string is {}", combined);
+}
+fn update_string() {
+    let mut s = String::from("Initial String");
+
+    s.push_str(" and sone additional string");
+
+    println!("update function: After updated: {}", s);
 }
