@@ -10,6 +10,18 @@ fn main() {
 
     println!("{}", sum(x, y));
     println!("Hello, World");
+
+    /*
+    let x = 1;
+    {
+        let y = 4 // store on stack
+        // this is nothing to do with ownership
+
+    }
+
+    println!("{}", y); // error
+
+    */
 }
 
 fn sum(a: i32, b: i32) -> i32 {
