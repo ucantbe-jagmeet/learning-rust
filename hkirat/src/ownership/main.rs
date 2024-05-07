@@ -44,9 +44,9 @@ fn main() {
     // if lets assume my_String is a number  i32 , then it will create another copy on the stack , but here in the case of string it is different
 
     let mut my_string = String::from("Hello");
-    let my_string1 = takes_ownership(my_string);
+    my_string = takes_ownership(my_string);
 
-    println!("{}", my_string1)
+    println!("{}", my_string)
 }
 
 fn takes_ownership(some_string: String) -> String {
