@@ -16,12 +16,23 @@ fn main() {
 
     // println!("1 {}", my_string);
 
-    let mut s1 = String::from("Hello");
-    update_word(&mut s1);
-    update_word(&mut s1);
-    update_word(&mut s1);
-    update_word(&mut s1);
-    println!("{}", s1);
+    // let mut s1 = String::from("Hello");
+    // update_word(&mut s1);
+    // update_word(&mut s1);
+    // update_word(&mut s1);
+    // update_word(&mut s1);
+    // println!("{}", s1);
+
+    // let mut s1 = String::from("Hello");
+    // let s2 = &mut s1;
+    // let s3 = &s1;
+    // s2.push_str(" sasas");
+    // update_word(&mut s1);
+
+    /*
+    ->
+
+    */
 }
 
 fn takes_ownership(some_string: &String) {
