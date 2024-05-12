@@ -63,6 +63,30 @@ fn main() {
     borrowing_slice(arr, slice);
     */
     //#######arrays and slice ends ######
+
+    //###### strings ########
+    /*
+    let str = "hello wordd";
+       let mut string = String::from("Hello world");
+
+       let slice = &string[..6];
+       let length = slice.len();
+
+       string.push('1');
+       string.push_str("! Bob");
+       string = string.replace("Hello", "bye");
+       println!("{}", string); */
+
+    //###### strings ends ########
+    //###### match statement starts ########
+    let i = 5;
+    match i {
+        0 => println!("0"),
+        1 | 2 => println!("1 ,2"),
+        3..=4 => println!("3,4"),
+        _ => println!("other number"),
+    }
+    //###### match statement ends ########
 }
 
 // fn is_even(num: u8) -> bool {
