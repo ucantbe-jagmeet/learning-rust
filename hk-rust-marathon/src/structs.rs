@@ -15,6 +15,12 @@ impl Rect {
     fn area(&self) -> u32 {
         self.width * self.height
     }
+    fn peri(&self, num:i32) -> u32 {
+        2*(self.width + self.height)
+    }
+    fn debug() -> u32 {
+        1
+    }
 }
 
 fn main() {
@@ -32,5 +38,7 @@ fn main() {
         height: 50,
     };
 
-    println!("The area of the reactangle is {}", rect.area())
+    println!("The area of the reactangle is {}", rect.area());
+    println!("The peri of the reactangle is {}", rect.peri(32));
+    println!("The peri of the reactangle is {}", Rect::debug());
 }
