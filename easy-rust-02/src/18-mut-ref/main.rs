@@ -18,7 +18,6 @@ fn main() {
     let number_ref = &number; // create an immutable reference
     println!("{}", number_ref); // print the immutable reference
 
-    // ###########################################
 
     let country = String::from("Austria"); // Now we have a String called country
     let country_ref = &country; // country_ref is a reference to this data. It's not going to change
